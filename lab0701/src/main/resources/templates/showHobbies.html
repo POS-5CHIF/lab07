@@ -1,0 +1,37 @@
+<!--Michael König-->
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Alle Noten</title>
+</head>
+<body>
+<h1>Hobbies</h1>
+<table>
+    <thead>
+    <tr>
+        <th>Vorname</th>
+        <th>Zuname</th>
+        <th>Geburtsdatum</th>
+        <th>Geschlecht</th>
+        <th>Hobbies</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr th:each="p : ${persons}">
+        <td th:text="${p.firstName}"></td>
+        <td th:text="${p.lastName}"></td>
+        <td th:text="${p.birthDay}"></td>
+        <td th:text="${p.sex}"></td>
+        <td th:text="${p.getFormattedHobbies()}"></td>
+    </tr>
+    </tbody>
+</table>
+
+<a th:href="@{/neuePerson}">Zurück</a>
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!--Michael König-->
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Neue Person erfassen</title>
+</head>
+<body>
+<h1>Neue Person erfassen</h1>
+<form method="post" th:action="@{/neuePerson}" th:object="${person}">
+    <label for="firstName">Vorname:</label>
+    <input type="text"
+           th:field="*{firstName}"
+           required="true"
+           id="firstName"
+    />
+    <br>
+    <label for="lastName">Zuname:</label>
+    <input type="text"
+           th:field="*{lastName}"
+           required="true"
+           id="lastName"
+    />
+    <br>
+    <label for="date">Gebursdatum:</label>
+    <input id="date"
+           type="date"
+           th:field="*{birthDay}"
+           required="true"
+    />
+    <br>
+    <label for="sex">Geschlecht:</label>
+    <select id="sex"
+            th:field="${sex}" required="true">
+        <option th:each="s : ${sex}"
+                th:value="${s.ordinal()}"
+                th:text="${s.name()}"></option>
+    </select>
+    <br>
+    <label for="hobbies">Hobbies:</label>
+    <select id="hobbies"
+            multiple
+            th:field="*{hobbies}">
+        <option th:each="h : ${hobbies}"
+                th:value="${h.id}"
+                th:text="${h.description}"></option>
+    </select>
+
+    <br>
+    <input type="submit" value="Person erfassen">
+</form>
+</body>
+</html>
