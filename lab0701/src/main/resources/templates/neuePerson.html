@@ -34,7 +34,7 @@
     <br>
     <label for="sex">Geschlecht:</label>
     <select id="sex"
-            th:field="${sex}" required="true">
+            th:field="*{sex}" required="true">
         <option th:each="s : ${sex}"
                 th:value="${s.ordinal()}"
                 th:text="${s.name()}"></option>
