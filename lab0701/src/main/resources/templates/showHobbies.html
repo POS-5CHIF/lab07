@@ -25,7 +25,7 @@
     <tr th:each="p : ${persons}">
         <td th:text="${p.firstName}"></td>
         <td th:text="${p.lastName}"></td>
-        <td th:text="${p.birthDay}"></td>
+        <td th:text="${p.getFormattedBirthday()}"></td>
         <td th:text="${p.sex}"></td>
         <td th:text="${p.getFormattedHobbies()}"></td>
     </tr>

@@ -24,8 +24,4 @@ public class Hobby implements Serializable {
 
     @Column(name = "hobby_description")
     private String description;
-
-    @ManyToOne
-    @JoinColumn(name = "hobby_person")
-    private Person person;
 }

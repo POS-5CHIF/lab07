@@ -48,7 +48,7 @@ public class AppController {
     @PostMapping("/neuePerson")
     public String processInput(@ModelAttribute @Valid Person person, BindingResult result, Model model) {
         if (result.hasErrors()) {
-            result.getAllErrors().forEach(System.out::println);
+            return "redirect:/error";
         }
 
         System.out.println(person);

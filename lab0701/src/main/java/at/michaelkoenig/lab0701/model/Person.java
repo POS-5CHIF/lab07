@@ -11,6 +11,7 @@ import javax.validation.constraints.PastOrPresent;
 import javax.validation.constraints.Pattern;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -30,11 +31,11 @@ public class Person implements Serializable {
     private Integer id;
 
     @Column(name = "person_first_name")
-    @Pattern(regexp = "[A-ZÄÖÜ][a-zäöü]+")
+    @Pattern(regexp = "[A-ZÄÖÜ][a-zäöü]{1,19}")
     private String firstName;
 
     @Column(name = "person_last_name")
-    @Pattern(regexp = "[A-ZÄÖÜ][a-zäöü]+")
+    @Pattern(regexp = "[A-ZÄÖÜ][a-zäöü]{1,19}")
     private String lastName;
 
     @Column(name = "person_birth_day")
@@ -42,9 +43,10 @@ public class Person implements Serializable {
     @PastOrPresent
     private LocalDate birthDay;
 
-    @OneToMany(mappedBy = "person")
-    @JsonIgnore
-    @ToString.Exclude
+    @ManyToMany
+    @JoinTable(name = "person_hobby",
+            joinColumns = {@JoinColumn(name = "person_id")},
+            inverseJoinColumns = {@JoinColumn(name = "hobby_id")})
     private List<Hobby> hobbies = new ArrayList<>();
 
     @Column(name = "person_sex")
@@ -53,5 +55,9 @@ public class Person implements Serializable {
 
     public String getFormattedHobbies() {
         return hobbies.stream().map(h -> h.getDescription()).collect(Collectors.joining(", "));
+    }
+
+    public String getFormattedBirthday() {
+        return birthDay.format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
     }
 }

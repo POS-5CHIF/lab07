@@ -8,9 +8,10 @@ import org.springframework.stereotype.Component;
  * @author Michael König
  */
 @Component
-public class SexConverter implements Converter<Integer, Sex> {
+public class SexConverter implements Converter<String, Sex> {
     @Override
-    public Sex convert(Integer idx) {
+    public Sex convert(String from) {
+        int idx = Integer.parseInt(from);
         return Sex.values()[idx];
     }
 
